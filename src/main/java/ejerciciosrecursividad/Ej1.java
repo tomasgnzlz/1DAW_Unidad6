@@ -18,12 +18,13 @@ public class Ej1 {
         char[] arrayChar = new char[5];
         arrayChar = rellenarMatrizChar(arrayChar);
 
-        recursivo(arrayChar, 0);
+        recursivoMostrar(arrayChar, 0);
 
         //
         //
         int[] arrayNumeros = {1, 2, 3, 4, 5};
-        System.out.println(recursivoSumar(arrayNumeros, 0));
+        
+        System.out.println( "La suma de todos los valores del array: "+recursivoSumar(arrayNumeros, 0));
 
     }
 
@@ -39,23 +40,22 @@ public class Ej1 {
         return arrayAux;
     }
 
-    public static void recursivo(char[] arrayAux, int posicion) {
+    public static void recursivoMostrar(char[] arrayAux, int posicion) {
 
         if (posicion < arrayAux.length) {
             System.out.println(arrayAux[posicion++]);
-            recursivo(arrayAux, posicion);
+            recursivoMostrar(arrayAux, posicion);
         }
 
     }
 
     public static int recursivoSumar(int[] array, int posicion) {
-
-        if (posicion == 0) {
-            return 0;
-        } else {
-            posicion++;
-            return recursivoSumar(array, posicion);
-        }
+        int suma = 0;
+        if (posicion < array.length) {
+            suma += array[posicion++];
+            return suma + recursivoSumar(array, posicion);
+       }
+        return suma;
 
     }
 
