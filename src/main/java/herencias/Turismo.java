@@ -9,7 +9,8 @@ package herencias;
  * @author tomas
  */
 public class Turismo extends Vehiculo {
-        private int numPuertas;
+
+    private int numPuertas;
 
     public Turismo(int numPuertas, String matricula, String bastidor, String marca, Double tarifa) {
         super(matricula, bastidor, marca, tarifa);
@@ -31,10 +32,8 @@ public class Turismo extends Vehiculo {
 
     @Override
     public String toString() {
-        return  super.toString() + "Turismo{" + "numPuertas=" + numPuertas + '}';
+        return super.toString() + "Turismo{" + "numPuertas=" + numPuertas + '}';
     }
-
-    
 
     @Override
     public int hashCode() {
@@ -57,15 +56,9 @@ public class Turismo extends Vehiculo {
         final Turismo other = (Turismo) obj;
         return this.numPuertas == other.numPuertas;
     }
-    
-    
-    public void añadirRuedaRepuesto(){
+
+    public void añadirRuedaRepuesto() {
         System.out.println("Añadio rueda repuesto");
     }
-    
-            
-    
-    
-    
-    
+
 }
