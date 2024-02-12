@@ -20,6 +20,7 @@ public class Furgoneta extends Vehiculo{
     public Furgoneta() {
     }
     
+    
     public Furgoneta(double cargaMax, String matricula, String bastidor) {
         super(matricula, bastidor, null, 0.0);
         this.cargaMax = cargaMax;

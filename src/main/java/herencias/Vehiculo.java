@@ -109,5 +109,10 @@ public class Vehiculo {
     public void descontarTarifa(double aux){
         this.tarifa = aux;
     }
+    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+    public void pasarItv(){
+        System.out.println("Soy un vhiculo y estoy pasando la itv");
+    }
 
 }
