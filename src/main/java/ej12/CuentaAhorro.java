@@ -42,12 +42,23 @@ public class CuentaAhorro extends Cuenta {
 
     @Override
     public void actualizarSaldo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        double saldoNuevo = 0;
+
+        saldoNuevo = ((this.getSaldo() + (this.getSaldo() * interesVariable)) - comisionAnual);
+
+        this.setSaldo(saldoNuevo);
+        // controlar el saldo negativo...
+
     }
 
     @Override
     public void retirarSaldo(double saldoRetirar) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        double saldoNuevo = 0;
+        saldoNuevo = this.getSaldo() - saldoRetirar;
+        if (saldoNuevo > 0) {
+            this.setSaldo(saldoNuevo);
+        } // de lo contrario no se podra retirar el dinero
     }
 
 }
