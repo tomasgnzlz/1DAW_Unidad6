@@ -60,10 +60,7 @@ public class CuentaCorriente extends Cuenta {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         double saldoNuevo = 0;
         saldoNuevo = this.getSaldo() - saldoRetirar;
-        if (saldoNuevo < saldoMinimo) {
-            System.out.println("No puedes retirar tanta cantidad");
-        } else {
-            // Se establece el nuevo saldo
+        if (!(saldoNuevo < saldoMinimo)) {
             this.setSaldo(saldoNuevo);
         }
     }

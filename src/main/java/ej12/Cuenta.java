@@ -4,6 +4,8 @@
  */
 package ej12;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.apache.commons.lang3.RandomStringUtils;
 
 /**
@@ -17,10 +19,30 @@ public abstract class Cuenta {
     private double saldo;
     private Persona cliente;
 
+    //Creo un set para guardar los numeros de cuenta
+    private static Set<String> conjuntoNumerosCuenta = new HashSet<>();
+
+    public static String generarNumerosUnicos() {
+        RandomStringUtils rds = new RandomStringUtils();
+        String numCuenta = "";
+        boolean salir = false;
+        do {
+            numCuenta = rds.randomNumeric(20);
+            if (!conjuntoNumerosCuenta.contains(numCuenta)) {
+                conjuntoNumerosCuenta.add(numCuenta);
+                salir = true;
+            }
+        } while (!salir);
+
+        return numCuenta;
+
+    }
+
     // Constructor con parmetros
     public Cuenta(Persona cliente) {
-        RandomStringUtils rds = new RandomStringUtils();
-        this.numeroCuenta = rds.randomNumeric(21);
+        //RandomStringUtils rds = new RandomStringUtils();
+        //this.numeroCuenta = rds.randomNumeric(21);
+        this.numeroCuenta = generarNumerosUnicos();
         this.saldo = 0.0;
         this.cliente = cliente;
     }
@@ -55,9 +77,9 @@ public abstract class Cuenta {
     public String toString() {
         return "Cuenta{" + "numeroCuenta=" + numeroCuenta + ", saldo=" + saldo + ", cliente=" + cliente.getNombre() + '}';
     }
-    
-    
+
     public abstract void actualizarSaldo();
+
     public abstract void retirarSaldo(double saldoRetirar);
 
 }
