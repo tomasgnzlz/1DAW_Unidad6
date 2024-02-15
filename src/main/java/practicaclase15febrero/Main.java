@@ -23,25 +23,27 @@ public class Main {
 
         ArrayList<Viaje> listaViajes = getListaViajes();
         System.out.println(listaViajes);
-
         // Prueba metodo1
-        Map<String, Integer> estructura = metodo1(listaViajes);
         System.out.println("********************METOOD1********************");
+        Map<String, Integer> estructura = metodo1(listaViajes);
         mostrarMapForEach(estructura);
         System.out.println("");
-
         // Prueba metood2
-        
         System.out.println("********************METOOD2********************");
         Set<String> setDestinos = metodo2(listaViajes);
-        System.out.println(setDestinos);
         mostrarSetIterador(setDestinos);
         System.out.println("");
-        
+
+        // Prueba metodo3
+        Map<String, Integer> estructura2 = metodo3(listaViajes);
+        System.out.println("********************METOOD3********************");
+        mostrarMapForEach(estructura2);
+        System.out.println("");
+
         // Prueba metood4
         System.out.println("********************METOOD4********************");
         metodo4(listaViajes);
-        
+
     }
     //----------------------------------------
     // ABRE EL ARCHIVO POM.XML, MODIFICA EL CONTENIDO QUE HAY ENTRE LAS ETIQUETAS
@@ -57,26 +59,16 @@ public class Main {
     // e imprime el resultado usando un foreach
     public static Map<String, Integer> metodo1(ArrayList<Viaje> lista) {
         Map<String, Integer> estructura = new HashMap<>();
-        // recorro la lista
-        int sumaPasajeros = 0;
-        
         for (Viaje v : lista) {
             if (estructura.containsKey(v.origen())) {
-                // ese destino ya eta en el map, solo se tiene que actualizar la variable
-                sumaPasajeros += estructura.get(v.origen());
-                estructura.put(v.origen(), sumaPasajeros+1);
+                int viajesAnteriores = estructura.get(v.origen());
+                estructura.put(v.origen(), viajesAnteriores + 1);
             } else {
-                estructura.put(v.origen(), v.numeroPasajeros());
+                estructura.put(v.origen(), 1);
             }
         }
 
         return estructura;
-    }
-
-    public static void mostrarMapForEach(Map<String, Integer> estructura) {
-        for (Map.Entry<String, Integer> est : estructura.entrySet()) {
-            System.out.println("Destino: " + est.getKey() + " - Pasajeros: " + est.getValue());
-        }
     }
 
     // B.- Crea un método que reciba la lista y devuelva una estructura de datos/colección 
@@ -91,10 +83,10 @@ public class Main {
         }
         return setDestinos;
     }
-    
-    public static void mostrarSetIterador(Set<String> setAux){
+
+    public static void mostrarSetIterador(Set<String> setAux) {
         Iterator<String> iterador = setAux.iterator();
-        if (iterador.hasNext()) {
+        while (iterador.hasNext()) {
             String s = iterador.next();
             System.out.println(s);
         }
@@ -104,21 +96,43 @@ public class Main {
     // para saber por cada ciudad destino el número total de viajeros que llegan ese día
     // Usa el método en el main, obten las claves de la estructura devuelta e iterando por ellas imprime 
     // el número de viajeros por ciudad
-    
-    
+    public static Map<String, Integer> metodo3(ArrayList<Viaje> lista) {
+        Map<String, Integer> estructura = new HashMap<>();
+        // recorro la lista
+        int sumaPasajeros = 0;
+
+        for (Viaje v : lista) {
+            if (estructura.containsKey(v.origen())) {
+                // ese destino ya eta en el map, solo se tiene que actualizar la variable
+                sumaPasajeros = estructura.get(v.origen());
+                estructura.put(v.origen(), sumaPasajeros + v.numeroPasajeros());
+            } else {
+                estructura.put(v.origen(), v.numeroPasajeros());
+            }
+        }
+
+        return estructura;
+    }
+
+    public static void mostrarMapForEach(Map<String, Integer> estructura) {
+        for (Map.Entry<String, Integer> est : estructura.entrySet()) {
+            System.out.println("Destino: " + est.getKey() + " - Pasajeros: " + est.getValue());
+        }
+    }
+
     // D.- Crea un método que reciba la lista y la ordene por destino y si hay
     // destinos iguales se ordenan por número de viajeros. Usa el método en el main
     // e imprime el resultado usando foreach con expresión lambda, para obtener
     // una salida como esta por cada elemento: "Destino: Estepona Viajeros: 35" 
-    
-    public static void metodo4(ArrayList<Viaje> listaAux){
-        Comparator<Viaje> porNumeroViajeros = (e1,e2) -> Integer.compare(e1.numeroPasajeros(), e2.numeroPasajeros());
-        Comparator<Viaje> porDestino = (d1,d2) ->d1.destino().compareToIgnoreCase(d2.destino());
+    public static void metodo4(ArrayList<Viaje> listaAux) {
+        Comparator<Viaje> porNumeroViajeros = (e1, e2) -> Integer.compare(e1.numeroPasajeros(), e2.numeroPasajeros());
+        Comparator<Viaje> porDestino = (d1, d2) -> d1.destino().compareToIgnoreCase(d2.destino());
         Collections.sort(listaAux, porDestino.thenComparing(porNumeroViajeros));
-        for (Viaje viaje : listaAux) {
-            System.out.println("Destino: " + viaje.destino() + " Viajeros: " + viaje.numeroPasajeros());
-        }
+
+        // Lo muestro
+        listaAux.forEach(elemento -> System.out.println("Destino: " + elemento.destino() + " Viajeros: " + elemento.numeroPasajeros()));
     }
+
     //---------------------------------------
     private static ArrayList<Viaje> getListaViajes() {
         ArrayList<Viaje> listaViajes = new ArrayList();
