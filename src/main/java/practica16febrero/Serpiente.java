@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author tomas
  */
 public class Serpiente {
+
     public static void main(String[] args) {
 
         int[][] matriz = new int[8][8];
@@ -20,23 +21,21 @@ public class Serpiente {
         matriz[2][3] = 1;
         matriz[2][4] = 1;
         matriz[2][5] = 1;
-//        matriz[3][5] = 1;
-//        matriz[4][2] = 1;
-//        matriz[4][3] = 1;
-//        matriz[4][4] = 1;
-//        matriz[4][5] = 1;
-//        matriz[5][2] = 1;
-//        matriz[6][2] = 1;
+        matriz[3][5] = 1;
+        matriz[4][2] = 1;
+        matriz[4][3] = 1;
+        matriz[4][4] = 1;
+        matriz[4][5] = 1;
+        matriz[5][2] = 1;
+        matriz[6][2] = 1;
 
         mostrarMatriz(matriz);
         System.out.println("********Celdas********");
         buscarPrimerValor(matriz, listaCeldas);
-        mostrarMatriz(matriz);
-        
+
         // le paso el cero para que empiece a buscar a partir de la primera posicion de la lista,
         // que es el primer 1 que he encontrado
-        buscarSigueintes(matriz, listaCeldas, 0); 
-        mostrarMatriz(matriz);
+        buscarSigueintes(matriz, listaCeldas, 0);
         listaCeldas.forEach(System.out::println);
 
     }
@@ -64,16 +63,11 @@ public class Serpiente {
 
     public static void buscarPrimerValor(int[][] matriz, ArrayList<Celda> listaCeldas) {
         boolean salir = false;
-//        int pI = 99999;
-//        int pJ = 99999;
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
                 if (matriz[i][j] == 1) {
-                    //System.out.println(i + ":" + j);
                     matriz[i][j] = 3;
                     listaCeldas.add(new Celda(i, j));
-//                    pI = i;
-//                    pJ = j;
                     salir = true;
                     if (salir) {
                         break;
@@ -85,46 +79,46 @@ public class Serpiente {
             }
         }
         salir = false;
-//        
-//        do {
-//            if (matriz[pI][pJ-1] == 1) { 
-//                matriz[pI][pJ] = 3;
-//            }else if (matriz[pI][pJ+1] == 1) {
-//                matriz[pI][pJ] = 3;
-//            }
-//        } while (salir);
-
     }
-    
-    
-    
-    // le paso la celda que quiero buscar
 
+    // le paso la celda que quiero buscar
     public static void buscarSigueintes(int[][] matriz, ArrayList<Celda> listaCeldas, int posicionLista) {
         // recorro la lista y 
-        int pI = 99999;
-        int pJ = 99999;
-        //int posicionLista = 0;
+        int pI = listaCeldas.get(posicionLista).getX();
+        int pJ = listaCeldas.get(posicionLista).getY();
 
-        pI = listaCeldas.get(posicionLista).getX();
-        pJ = listaCeldas.get(posicionLista).getY();
+        mostrarMatriz(matriz);
 
-        if (matriz[pI][pJ + 1] == 1) {
+        if (matriz[pI][pJ + 1] == 1) { // derecha
             matriz[pI][pJ + 1] = 3;
-            listaCeldas.add(new Celda(pI, pJ));
-            
+            listaCeldas.add(new Celda(pI, pJ + 1));
+
             // vuelvo a llamar a este metodo para que busque a partir del siguiente elemento de la lista a la que meto los valores
             posicionLista++;
             buscarSigueintes(matriz, listaCeldas, posicionLista);
-        } else if (matriz[pI][pJ - 1] == 1) {
+        } else if (matriz[pI][pJ - 1] == 1) { // izquierda
             matriz[pI][pJ - 1] = 3;
-            listaCeldas.add(new Celda(pI, pJ));
-            
+            listaCeldas.add(new Celda(pI, pJ - 1));
+
             // vuelvo a llamar a este metodo para que busque a partir del siguiente elemento de la lista a la que meto los valores
             posicionLista++;
-            buscarSigueintes(matriz, listaCeldas, posicionLista);   
-        }
+            buscarSigueintes(matriz, listaCeldas, posicionLista);
+        } else if (matriz[pI - 1][pJ] == 1) { // arriba
+            matriz[pI - 1][pJ] = 3;
+            listaCeldas.add(new Celda(pI - 1, pJ));
 
+            // vuelvo a llamar a este metodo para que busque a partir del siguiente elemento de la lista a la que meto los valores
+            posicionLista++;
+            buscarSigueintes(matriz, listaCeldas, posicionLista);
+
+        } else if (matriz[pI + 1][pJ] == 1) { // abajo
+            matriz[pI + 1][pJ] = 3;
+            listaCeldas.add(new Celda(pI + 1, pJ));
+
+            // vuelvo a llamar a este metodo para que busque a partir del siguiente elemento de la lista a la que meto los valores
+            posicionLista++;
+            buscarSigueintes(matriz, listaCeldas, posicionLista);
+        }
     }
-    
+
 }
