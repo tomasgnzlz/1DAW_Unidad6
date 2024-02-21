@@ -14,6 +14,28 @@ import java.util.List;
  */
 public class GestionHospital {
 
+    private Hospital hospital;
+
+    // constructor
+    public GestionHospital(Hospital hospital) {
+        this.hospital = hospital;
+    }
+
+    // Métodos
+    // No entiendo muy bien lo de crear estos metodos, donde los uso?
+    public static Paciente crearPaciente(String numeroHistoria, String nombre, String apellidos, Nif nif) {
+        return new Paciente(numeroHistoria, nombre, apellidos, nif);
+    }
+
+    public static Medico crearMedico(Especialidad especialidad, String numeroSeguridadSocial, double sueldo, String nombre, String apellidos, Nif nif) {
+        return new Medico(especialidad, numeroSeguridadSocial, 0, nombre, apellidos, nif);
+    }
+
+    public static Administrativo crearPersonalPAS(Grupo grupo, String numeroSeguridadSocial, double sueldo, String nombre, String apellidos, Nif nif) {
+        return new Administrativo(grupo, numeroSeguridadSocial, 0, nombre, apellidos, nif);
+    }
+
+    // Main
     public static void main(String[] args) {
         List<Empleado> listaEmpleados = new ArrayList<>();
         List<Paciente> listaPacientes = new ArrayList<>();
@@ -28,11 +50,6 @@ public class GestionHospital {
         Administrativo e5 = new Administrativo(Grupo.E, "05", 3500, "pepe3", "peposo3", new Nif());
 
         // añado los empleados a la lista
-//        listaEmpleados.add(e1);
-//        listaEmpleados.add(e2);
-//        listaEmpleados.add(e3);
-//        listaEmpleados.add(e4);
-//        listaEmpleados.add(e5);
         hospital.contratarEmpleado(e1);
         hospital.contratarEmpleado(e2);
         hospital.contratarEmpleado(e3);
@@ -47,11 +64,6 @@ public class GestionHospital {
         Paciente p5 = new Paciente("010", "juan5", "juanjo5", new Nif());
 
         // añado los pacientes a la lista
-//        listaPacientes.add(p1);
-//        listaPacientes.add(p2);
-//        listaPacientes.add(p3);
-//        listaPacientes.add(p4);
-//        listaPacientes.add(p5);
         hospital.ingresarPacientes(p1);
         hospital.ingresarPacientes(p2);
         hospital.ingresarPacientes(p3);
@@ -77,3 +89,4 @@ public class GestionHospital {
 
     }
 }
+
