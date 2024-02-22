@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author tomas
  */
 public class Chicles {
-    
+
     public static void main(String[] args) {
         boolean salir = false;
         String opcionSalir = "";
@@ -41,6 +41,48 @@ public class Chicles {
 
     }
 
+    public static String viabilidadCafeteria(int numeroEnvoltoriosNecesarios, int numeroChiclesRegalarEnFuncionComprados, int numeroChiclesComprados) {
+        boolean viable = false;
+        boolean salir = false;
+
+        /*En el momento en el que me quede sin envoltrios para poder canjear por mas chicles la cafeteria no es viable*/
+        int numeroEnvoltoriosSobran = 0;
+        int numeroChiclesTotales = 0;
+        int chiclesRegalados = 0;
+        int numAux = 0;
+
+        // no se me ejecuta iquiera
+        do {
+            // Calculo el numero de chicles totales que compro
+            numAux = (numeroChiclesComprados / numeroEnvoltoriosNecesarios);
+            numeroChiclesTotales = numeroChiclesComprados + numAux;
+
+            chiclesRegalados = (numeroChiclesComprados / numeroEnvoltoriosNecesarios);
+            numeroEnvoltoriosSobran = (chiclesRegalados / numeroEnvoltoriosNecesarios);
+
+            // para que se salga del bucle
+            if (numeroEnvoltoriosSobran < numeroEnvoltoriosNecesarios) {
+                salir = true;
+            } else {
+                System.out.println("Aun quedan envoltorios para canjear");
+            }
+
+        } while (!salir);
+
+        if (numeroEnvoltoriosSobran < numeroEnvoltoriosNecesarios) {
+            viable = true;
+        } else {
+            viable = false;
+        }
+        String textBlock = """
+                          ----------------------------------------------------------------
+                          La campaña es viable? -> %b
+                          Me he comido un total de %d chicles y me sobraron %d envoltorios
+                          ----------------------------------------------------------------
+                          """.formatted(viable, numeroChiclesTotales, numeroEnvoltoriosSobran);
+        return textBlock;
+    }
+
     //Número de envoltorios necesarios para que nos regalen más chicles.
     public static int numerosEnvoltorios() {
         Scanner teclado = new Scanner(System.in);
@@ -68,39 +110,4 @@ public class Chicles {
         return num;
     }
 
-    public static String viabilidadCafeteria(int numeroEnvoltoriosNecesarios,
-            int numeroChiclesRegalarEnFuncionComprados,
-            int numeroChiclesComprados) {
-
-        boolean viable = false;
-
-        /*En el momento en el que me quede sin envoltrios para poder canjear por
-        mas chicles la cafeteria no es viable*/
-        int numeroEnvoltoriosSobran = 0;
-        int numeroChiclesTotales = 0;
-        int chiclesRegalados = 0;
-        int numAux = 0;
-
-        // no se me ejecuta iquiera
-        do {
-            numAux = (numeroChiclesComprados / numeroEnvoltoriosNecesarios);
-            numeroChiclesTotales = numeroChiclesComprados + numAux;
-            chiclesRegalados = (numeroChiclesComprados / numeroEnvoltoriosNecesarios);
-            numeroEnvoltoriosSobran = (chiclesRegalados / numeroEnvoltoriosNecesarios);
-        } while (numeroEnvoltoriosSobran < numeroEnvoltoriosNecesarios);
-
-        if (numeroEnvoltoriosSobran < numeroEnvoltoriosNecesarios) {
-            viable = true;
-        } else {
-            viable = false;
-        }
-        String textBlock = """
-                          ----------------------------------------------------------------
-                          La campaña es viable? -> %b
-                          Me he comido un total de %d chicles y me sobraron %d envoltorios
-                          ----------------------------------------------------------------
-                          """.formatted(viable, numeroChiclesTotales, numeroEnvoltoriosSobran);
-        return textBlock;
-    }
-    
 }
