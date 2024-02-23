@@ -10,6 +10,6 @@ package daw;
  */
 public interface SeEnvia {
 
-    String enviar(String direccion);
+    void enviar(String direccion);
 
 }

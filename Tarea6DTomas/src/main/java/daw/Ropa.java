@@ -38,9 +38,9 @@ public abstract class Ropa extends Producto implements SeEnvia {
     }
 
     @Override
-    public String enviar(String direccion) {
+    public void enviar(String direccion) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        return "Se envia la ropa " + this.getDescripcion() + " a la dirección: " + direccion;
+        System.out.println("Se envia la ropa " + this.getDescripcion() + " a la dirección: " + direccion);
     }
 
 }

@@ -4,6 +4,8 @@
  */
 package daw;
 
+import java.util.Random;
+
 /**
  *
  * @author tomas
@@ -40,6 +42,12 @@ public final class LibroDigitall extends Libro implements SeDescarga {
     public void descargar() {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         System.out.println("http;//tomas.daw/" + this.hashCode());
+    }
+
+    @Override
+    public boolean megusta() {
+        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new Random().nextBoolean();
     }
 
 }

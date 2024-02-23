@@ -4,6 +4,8 @@
  */
 package daw;
 
+import java.util.Random;
+
 /**
  *
  * @author tomas
@@ -37,9 +39,14 @@ public final class LibroPapel extends Libro implements SeEnvia{
     }
 
     @Override
-    public String enviar(String direccion) {
+    public void enviar(String direccion) {
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        return "Se envia el Libro " + this.getDescripcion() + " a la dirección: " + direccion;
+        System.out.println("Se envia el Libro " + this.getDescripcion() + " a la dirección: " + direccion);
+    }
+
+    @Override
+    public boolean megusta() {
+        return new Random().nextBoolean();
     }
     
     

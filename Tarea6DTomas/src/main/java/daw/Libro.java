@@ -66,5 +66,8 @@ public abstract class Libro extends Producto implements Comparable<Libro> {
     public int compareTo(Libro o) {
         return this.isbn.compareToIgnoreCase(o.isbn);
     }
+    
+    // Me invento el metodo abstracto
+    public abstract boolean megusta();
 
 }
