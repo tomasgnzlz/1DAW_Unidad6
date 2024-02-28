@@ -44,6 +44,7 @@ public abstract class Libro extends Producto implements Comparable<Libro> {
     public final int hashCode() {
         int hash = 7;
         hash = 37 * hash + Objects.hashCode(this.isbn);
+        //
         return hash;
     }
 
