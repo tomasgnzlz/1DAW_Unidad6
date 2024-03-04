@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package daw;
+package productosherencia;
 
 /**
  *
  * @author tomas
  */
-public interface SeDescarga {
-    
-    void descargar();
-    
+public interface SeEnvia {
+
+    void enviar(String direccion);
+
 }
